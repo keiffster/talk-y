@@ -2,8 +2,8 @@
 
 clear
 
-export PYTHONPATH=./src:./libs/MetOffer-1.3.2/:./bots/y-bot/src:.
+export PYTHONPATH=./src:../program-y/src:../program-y/test/:../program-y/libs/MetOffer-1.3.2:.
 
-nosetests --with-coverage --cover-erase --with-xunit --cover-branches --cover-package=programy
+nosetests --with-coverage --cover-erase --with-xunit --cover-branches --cover-package=talky
 
 coverage html -d cover
