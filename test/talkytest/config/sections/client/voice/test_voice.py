@@ -1,9 +1,9 @@
 import unittest
 
 from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.sections.client.voice.voice import VoiceConfiguration
-from programy.config.sections.client.voice.stt.azhang import AnthonyZhangSpeechToTextConfiguration
-from programy.config.sections.client.voice.tts.pytts import PyTTSTextToSpeechConfiguration
+from talky.config.sections.client.voice.voice import VoiceConfiguration
+from talky.config.sections.client.voice.stt.azhang import AnthonyZhangSpeechToTextConfiguration
+from talky.config.sections.client.voice.tts.pytts import PyTTSTextToSpeechConfiguration
 
 
 class TestAnthonyZangSpeechToTextConfiguration(unittest.TestCase):
@@ -16,10 +16,10 @@ class TestAnthonyZangSpeechToTextConfiguration(unittest.TestCase):
               tts: pytts
               stt: azhang
               pytts:
-                classname: programy.clients.voice.tts.pyttssay.PyTTSSayTextToSpeach
+                classname: talky.clients.voice.tts.pyttssay.PyTTSSayTextToSpeach
                 rate_adjust: 50
               azhang:
-                classname: programy.clients.voice.stt.azhang.AnthonyZangWebServiceSpeechToText
+                classname: talky.clients.voice.stt.azhang.AnthonyZangWebServiceSpeechToText
                 ambient_adjust: 2
         """, VoiceConfiguration(), ".")
 
@@ -30,11 +30,11 @@ class TestAnthonyZangSpeechToTextConfiguration(unittest.TestCase):
         self.assertIsNotNone(config.stt_engine)
         self.assertIsInstance(config.stt_engine, AnthonyZhangSpeechToTextConfiguration)
         self.assertIsNotNone(config.stt_engine.classname)
-        self.assertEqual("programy.clients.voice.stt.azhang.AnthonyZangWebServiceSpeechToText", config.stt_engine.classname)
+        self.assertEqual("talky.clients.voice.stt.azhang.AnthonyZangWebServiceSpeechToText", config.stt_engine.classname)
         self.assertEqual(2, config.stt_engine.ambient_adjust)
 
         self.assertIsNotNone(config.tts_engine)
         self.assertIsInstance(config.tts_engine, PyTTSTextToSpeechConfiguration)
         self.assertIsNotNone(config.tts_engine.classname)
-        self.assertEqual("programy.clients.voice.tts.pyttssay.PyTTSSayTextToSpeach", config.tts_engine.classname)
+        self.assertEqual("talky.clients.voice.tts.pyttssay.PyTTSSayTextToSpeach", config.tts_engine.classname)
         self.assertEqual(50, config.tts_engine.rate_adjust)

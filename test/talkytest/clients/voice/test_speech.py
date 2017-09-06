@@ -1,8 +1,8 @@
 import unittest
 
-from programy.clients.voice.speech import ConversationBotClient
+from talky.clients.voice.speech import ConversationBotClient
 
-from test.clients.arguments import MockArgumentParser
+from programytest.clients.arguments import MockArgumentParser
 
 class ConversationBotClientTests(unittest.TestCase):
 

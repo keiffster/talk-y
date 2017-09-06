@@ -1,8 +1,8 @@
 import unittest
 
 from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.sections.client.voice.tts.pytts import PyTTSTextToSpeechConfiguration
-from programy.config.sections.client.voice.voice import VoiceConfiguration
+from talky.config.sections.client.voice.tts.pytts import PyTTSTextToSpeechConfiguration
+from talky.config.sections.client.voice.voice import VoiceConfiguration
 
 
 class TestAnythongZhangSpeechToTextConfiguration(unittest.TestCase):
@@ -14,7 +14,7 @@ class TestAnythongZhangSpeechToTextConfiguration(unittest.TestCase):
             voice:
               tts: pytts
               pytts:
-                classname: programy.clients.voice.tts.pyttssay.PyTTSSayTextToSpeach
+                classname: talky.clients.voice.tts.pyttssay.PyTTSSayTextToSpeach
                 rate_adjust: 50
         """, VoiceConfiguration(), ".")
 
@@ -25,5 +25,5 @@ class TestAnythongZhangSpeechToTextConfiguration(unittest.TestCase):
         self.assertIsNotNone(config.tts_engine)
         self.assertIsInstance(config.tts_engine, PyTTSTextToSpeechConfiguration)
         self.assertIsNotNone(config.tts_engine.classname)
-        self.assertEqual("programy.clients.voice.tts.pyttssay.PyTTSSayTextToSpeach", config.tts_engine.classname)
+        self.assertEqual("talky.clients.voice.tts.pyttssay.PyTTSSayTextToSpeach", config.tts_engine.classname)
         self.assertEqual(50, config.tts_engine.rate_adjust)

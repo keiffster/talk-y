@@ -1,7 +1,7 @@
 import unittest
 
-from programy.clients.voice.tts.osxsay import OSXSayTextToSpeach
-from programy.config.sections.client.voice.voice import VoiceConfiguration
+from talky.clients.voice.tts.osxsay import OSXSayTextToSpeach
+from talky.config.sections.client.voice.voice import VoiceConfiguration
 
 
 class OSXSayTextToSpeachTests(unittest.TestCase):

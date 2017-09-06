@@ -1,7 +1,7 @@
 import unittest
 
-from programy.clients.voice.stt.base import SpeechToText
-from programy.config.sections.client.voice.voice import VoiceConfiguration
+from talky.clients.voice.stt.base import SpeechToText
+from talky.config.sections.client.voice.voice import VoiceConfiguration
 
 
 class SpeechToTextTests(unittest.TestCase):

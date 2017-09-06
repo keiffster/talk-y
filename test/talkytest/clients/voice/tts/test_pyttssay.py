@@ -1,8 +1,8 @@
 import unittest
 
-from programy.clients.voice.tts.pyttssay import PyTTSSayTextToSpeach
-from programy.config.sections.client.voice.voice import VoiceConfiguration
-from programy.config.sections.client.voice.tts.pytts import PyTTSTextToSpeechConfiguration
+from talky.clients.voice.tts.pyttssay import PyTTSSayTextToSpeach
+from talky.config.sections.client.voice.voice import VoiceConfiguration
+from talky.config.sections.client.voice.tts.pytts import PyTTSTextToSpeechConfiguration
 
 class PyTTSSayTests(unittest.TestCase):
 

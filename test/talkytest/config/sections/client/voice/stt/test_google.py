@@ -1,8 +1,8 @@
 import unittest
 
 from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.sections.client.voice.voice import VoiceConfiguration
-from programy.config.sections.client.voice.stt.azhang import AnthonyZhangSpeechToTextConfiguration
+from talky.config.sections.client.voice.voice import VoiceConfiguration
+from talky.config.sections.client.voice.stt.azhang import AnthonyZhangSpeechToTextConfiguration
 
 class TestAnythongZhangSpeechToTextConfiguration(unittest.TestCase):
 
@@ -13,7 +13,7 @@ class TestAnythongZhangSpeechToTextConfiguration(unittest.TestCase):
             voice:
               stt: azhang
               azhang:
-                classname: programy.clients.voice.stt.azhang.AnthonyZhangSpeechToText
+                classname: talky.clients.voice.stt.azhang.AnthonyZhangSpeechToText
                 ambient_adjust: 2
                 service: google
         """, VoiceConfiguration(), ".")
@@ -25,5 +25,5 @@ class TestAnythongZhangSpeechToTextConfiguration(unittest.TestCase):
         self.assertIsNotNone(config.stt_engine)
         self.assertIsInstance(config.stt_engine, AnthonyZhangSpeechToTextConfiguration)
         self.assertIsNotNone(config.stt_engine.classname)
-        self.assertEqual("programy.clients.voice.stt.azhang.AnthonyZhangSpeechToText", config.stt_engine.classname)
+        self.assertEqual("talky.clients.voice.stt.azhang.AnthonyZhangSpeechToText", config.stt_engine.classname)
         self.assertEqual(2, config.stt_engine.ambient_adjust)
