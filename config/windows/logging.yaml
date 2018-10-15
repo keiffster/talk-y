@@ -11,7 +11,7 @@ handlers:
     file:
         class: logging.handlers.RotatingFileHandler
         formatter: simple
-        filename: /tmp/voice.log
+        filename: voice.log
         maxBytes: 20972152
         backupCount: 10
         encoding: utf-8
@@ -19,7 +19,7 @@ handlers:
     conversation:
         class : logging.handlers.RotatingFileHandler
         formatter: conversation
-        filename: /tmp/voice-conversation.log
+        filename: voice-conversation.log
 
 loggers:
   conversation:

@@ -14,14 +14,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.base import BaseConfigurationData
+from programy.config.client.config import ClientConfigurationData
 from talky.config.sections.client.voice.tts.pytts import PyTTSTextToSpeechConfiguration
 from talky.config.sections.client.voice.stt.azhang import AnthonyZhangSpeechToTextConfiguration
 
-class VoiceConfiguration(BaseConfigurationData):
+class VoiceConfiguration(ClientConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "voice")
+        ClientConfigurationData.__init__(self, "voice")
         self._tts_engine_name = None
         self._stt_engine_name = None
         self._tts_engine = None
@@ -43,16 +43,18 @@ class VoiceConfiguration(BaseConfigurationData):
     def stt_engine_name(self):
         return self._stt_engine_name
 
-    def load_config_section(self, config_file, bot_root):
-        voice = config_file.get_section(self.section_name)
+    def load_configuration(self, configuration_file, bot_root):
+        voice = configuration_file.get_section(self.section_name)
         if voice is not None:
 
-            self._tts_engine_name = config_file.get_option(voice, "tts", missing_value=None)
+            self._tts_engine_name = configuration_file.get_option(voice, "tts", missing_value=None)
             if self._tts_engine_name == 'pytts':
                 self._tts_engine = PyTTSTextToSpeechConfiguration()
-                self._tts_engine.load_config_sub_section(config_file, voice, bot_root)
+                self._tts_engine.load_config_sub_section(configuration_file, voice, bot_root)
 
-            self._stt_engine_name = config_file.get_option(voice, "stt", missing_value=None)
+            self._stt_engine_name = configuration_file.get_option(voice, "stt", missing_value=None)
             if self._stt_engine_name == 'azhang':
                 self._stt_engine = AnthonyZhangSpeechToTextConfiguration()
-                self._stt_engine.load_config_sub_section(config_file, voice, bot_root)
+                self._stt_engine.load_config_sub_section(configuration_file, voice, bot_root)
+
+        super(VoiceConfiguration, self).load_configuration(configuration_file, voice, bot_root)

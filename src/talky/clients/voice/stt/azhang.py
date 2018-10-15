@@ -23,31 +23,34 @@ class AnthonyZhangSpeechToText(SpeechToText):
 
     def __init__(self, configuration):
         SpeechToText.__init__(self, configuration)
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Initialising Google Speech To Text Engine...")
+        print("Initialising Google Speech To Text Engine...")
         self.record = sr.Recognizer()
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug('Calibrating microphone...')
+        print('Calibrating microphone...')
         with sr.Microphone() as source:
             self.record.adjust_for_ambient_noise(source, self.configuration.stt_engine.ambient_adjust)
+
+        print(("Listening using: [%s]" % self.configuration.stt_engine.service))
 
     def listen(self):
         with sr.Microphone() as source:
             try:
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Listening using: [%s]"%self.configuration.stt_engine.service)
                 audio = self.record.listen(source)
                 if self.configuration.stt_engine.service == 'sphinx':
-                    recordedSpeech =  self.record.recognize_sphinx(audio)
+                    recordedSpeech =  self.record.recognize_sphinx(audio, language='en-US')
                 elif self.configuration.stt_engine.service == 'google':
-                    recordedSpeech = self.record.recognize_google(audio)
-                elif self.configuration.stt_engine.service == 'google':
-                    recordedSpeech = self.record.recognize_google_cloud(audio)
+                    recordedSpeech = self.record.recognize_google(audio, language='en-US')
                 elif self.configuration.stt_engine.service == 'google_cloud':
-                    recordedSpeech = self.record.recognize_wit(audio)
+                    recordedSpeech = self.record.recognize_google_cloud(audio)
                 elif self.configuration.stt_engine.service == 'wit':
-                    recordedSpeech = self.stt_enginerecord.recognize_bing(audio)
+                    recordedSpeech = self.record.recognize_wit(audio, key='XXX')
                 elif self.configuration.stt_engine.service == 'bing':
-                    recordedSpeech = self.record.recognize_houndify(audio)
+                    recordedSpeech = self.stt_enginerecord.recognize_bing(audio)
                 elif self.configuration.stt_engine.service == 'houndify':
-                    recordedSpeech = self.record.recognize_ibm(audio)
+                    recordedSpeech = self.record.recognize_houndify(audio)
+                elif self.configuration.stt_engine.service == 'ibm':
+                    recordedSpeech = self.record.recognize_ibm(audio, username='xxx', password='xxx')
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unknown sst service [%s]" % self.configuration.stt_engine.service)
                     recordedSpeech = ""

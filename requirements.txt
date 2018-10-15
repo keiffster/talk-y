@@ -1,4 +1,4 @@
-pyttsx3
-pyAudio
-SpeechRecognition
-pocketsphinx
+pyttsx3==2.7
+pyAudio==0.2.11
+SpeechRecognition==3.8.1
+pocketsphinx==0.1.15

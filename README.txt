@@ -18,6 +18,20 @@ Finally we can install the required Python 3 packages
 pip3 install pyttsx3
 pip3 install pyAudio
 pip3 install SpeechRecognition
-pip3 install pocketsphinx 
+
+Depending upon the engine you are going to listen with, you need the following
+
+    sphinx
+        pip3 install pocketsphinx
+    google:
+        No further dependencies
+    google_cloud:
+        pip3 install google-api-python-client
+    wit:
+        key needed
+    houndify:
+        client_id and client_key needed
+    ibm:
+        username and password required
 
 And that should be it,

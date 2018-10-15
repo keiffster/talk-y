@@ -15,10 +15,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+import os
 
 from programy.clients.client import BotClient
 from talky.config.sections.client.voice.voice import VoiceConfiguration
-from talky.clients.voice.tts.osxsay import OSXSayTextToSpeach
+from talky.clients.voice.tts.osxsay import OSXSayTextToSpeech
 from talky.clients.voice.stt.azhang import AnthonyZhangSpeechToText
 
 class ConversationBotClient(BotClient):
@@ -29,16 +30,18 @@ class ConversationBotClient(BotClient):
         if self.configuration.client_configuration.tts_engine_name is None:
             raise Exception("No Text To Speech Engine, exiting...")
 
+        print("Text To Speech: " + self.configuration.client_configuration.tts_engine_name )
         if self.configuration.client_configuration.tts_engine_name == 'osx':
-            self.tts = OSXSayTextToSpeach(self.configuration.client_configuration)
+            self.tts = OSXSayTextToSpeech(self.configuration.client_configuration)
         elif self.configuration.client_configuration.tts_engine_name == 'pyttsx':
-            self.tts = OSXSayTextToSpeach(self.configuration.client_configuration)
+            self.tts = OSXSayTextToSpeech(self.configuration.client_configuration)
         else:
             raise Exception("Unknown Text To Speech Engine, exiting...")
 
         if self.configuration.client_configuration.stt_engine_name is None:
             raise Exception("No Speech To Text Engine, exiting...")
 
+        print("Speech To Text: " + self.configuration.client_configuration.stt_engine_name)
         if self.configuration.client_configuration.stt_engine_name == 'azhang':
             self.stt = AnthonyZhangSpeechToText(self.configuration.client_configuration)
         else:
@@ -54,38 +57,46 @@ class ConversationBotClient(BotClient):
         try:
             if self.arguments.noloop is False:
                 logging.info("Entering conversation loop...")
-                running = True
-                self.display_response(self.bot.get_version_string)
+
+                client_context = self.create_client_context("speechy")
+                self.display_response(client_context.bot.get_version_string(client_context))
 
                 # show and speak default response
-                default_response = self.bot.brain.post_process_response(self.bot, self.clientid,
-                                                                        self.bot.initial_question)
-                self.display_response(default_response)
-                self.tts.say(default_response)
+                default_response = client_context.brain.post_process_response(client_context, client_context.bot.initial_question)
+                #self.display_response(default_response)
+                #self.tts.say(default_response)
+
+            os.system('afplay ~/Documents/Development/Python/Projects/AIML/talk-y/resources/audio/beep.wav')
 
             running = True
             while running is True:
                 print("I'm listening...")
-                try:
-                    speechRecorded = self.stt.listen()
-                    if speechRecorded is not None and len(speechRecorded) > 0:
-                        print("Heard: [%s]"%speechRecorded)
-                        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Recorded [%s]"%speechRecorded)
-                        response = self.bot.ask_question(self.clientid, speechRecorded)
-                        if response is None:
-                            self.tts.say(self.bot.default_response)
-                            self.log_unknown_response(speechRecorded)
-                        else:
-                            self.tts.say(response)
-                            self.log_response(speechRecorded, response)
-                            self.display_response(response)
-                except KeyboardInterrupt:
-                    running = False
-                    self.display_response(self.bot.exit_response)
-                except Exception as excep:
-                    logging.exception(excep)
-                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Oops something bad happened !")
-                    self.display_response(self.bot.default_response)
+                speechRecorded = self.stt.listen()
+                if speechRecorded is not None and len(speechRecorded) > 0:
+                    if speechRecorded.upper() == "COMPUTER":
+                        print("Waiting for command...")
+                        os.system('afplay ~/Documents/Development/Python/Projects/AIML/talk-y/resources/audio/welcome.wav')
+                        try:
+                            speechRecorded = self.stt.listen()
+                            if speechRecorded is not None and len(speechRecorded) > 0:
+                                print("Heard: [%s]"%speechRecorded)
+                                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Recorded [%s]"%speechRecorded)
+                                response = client_context.bot.ask_question(client_context, speechRecorded)
+                                if response is None:
+                                    self.tts.say(self.bot.default_response)
+                                    self.log_unknown_response(speechRecorded)
+                                else:
+                                    self.tts.say(response)
+                                    self.log_response(speechRecorded, response)
+                                    self.display_response(response)
+                        except KeyboardInterrupt:
+                            running = False
+                            self.display_response(self.bot.exit_response)
+                        except Exception as excep:
+                            logging.exception(excep)
+                            print("Oops something bad happened !")
+                            print(excep)
+                            self.display_response(self.bot.default_response)
 
         # error occured when user has no microphone
         except OSError:

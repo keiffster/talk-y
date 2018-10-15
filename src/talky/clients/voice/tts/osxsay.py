@@ -19,7 +19,7 @@ import logging
 
 from talky.clients.voice.tts.base import TextToSpeech
 
-class OSXSayTextToSpeach(TextToSpeech):
+class OSXSayTextToSpeech(TextToSpeech):
 
     def __init__(self, configuration):
         TextToSpeech.__init__(self, configuration)
