@@ -21,6 +21,7 @@ from programy.clients.client import BotClient
 from talky.config.sections.client.voice.voice import VoiceConfiguration
 from talky.clients.voice.tts.osxsay import OSXSayTextToSpeech
 from talky.clients.voice.stt.azhang import AnthonyZhangSpeechToText
+from talky.utils.wav import play_wav
 
 class ConversationBotClient(BotClient):
     def __init__(self, argument_parser=None):
@@ -66,16 +67,19 @@ class ConversationBotClient(BotClient):
                 #self.display_response(default_response)
                 #self.tts.say(default_response)
 
-            os.system('afplay ~/Documents/Development/Python/Projects/AIML/talk-y/resources/audio/beep.wav')
+            play_wav('../../resources/audio/welcome.wav')
 
             running = True
             while running is True:
                 print("I'm listening...")
                 speechRecorded = self.stt.listen()
+
                 if speechRecorded is not None and len(speechRecorded) > 0:
+
                     if speechRecorded.upper() == "COMPUTER":
                         print("Waiting for command...")
-                        os.system('afplay ~/Documents/Development/Python/Projects/AIML/talk-y/resources/audio/welcome.wav')
+                        play_wav('../../resources/audio/beep.wav')
+
                         try:
                             speechRecorded = self.stt.listen()
                             if speechRecorded is not None and len(speechRecorded) > 0:
@@ -89,9 +93,11 @@ class ConversationBotClient(BotClient):
                                     self.tts.say(response)
                                     self.log_response(speechRecorded, response)
                                     self.display_response(response)
+
                         except KeyboardInterrupt:
                             running = False
                             self.display_response(self.bot.exit_response)
+
                         except Exception as excep:
                             logging.exception(excep)
                             print("Oops something bad happened !")
