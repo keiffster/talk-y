@@ -98,7 +98,7 @@ voice:
                 person2_storage:
                   file: ../../../y-bot/storage/lookups/person2.txt
                 regex_storage:
-                  file: ../../../y-bot/storage/lookups/regex.txt
+                  file: ../../../y-bot/storage/regex/regex-templates.txt
 
                 properties_storage:
                   file: ../../../y-bot/storage/properties/properties.txt
