@@ -63,207 +63,199 @@ voice:
               type:   file
               config:
                 categories_storage:
-                  dirs: ../../../y-bot/storage/categories
+                  dirs: ../../storage/categories
                   subdirs: true
                   extension: .aiml
                 errors_storage:
-                  file: ../../../y-bot/storage/debug/errors.txt
+                  file: ../../storage/debug/errors.txt
                 duplicates_storage:
-                  file: ../../../y-bot/storage/debug/duplicates.txt
+                  file: ../../storage/debug/duplicates.txt
                 learnf_storage:
-                  dirs: ../../../y-bot/storage/categories/learnf
+                  dirs: ../../storage/categories/learnf
 
                 conversation_storage:
-                  dirs: ../../../y-bot/storage/conversations
+                  dirs: ../../storage/conversations
 
                 sets_storage:
-                  dirs: ../../../y-bot/storage/sets
+                  dirs: ../../storage/sets
                   extension: txt
                 maps_storage:
-                  dirs: ../../../y-bot/storage/maps
+                  dirs: ../../storage/maps
                   extension: txt
                 rdf_storage:
-                  dirs: ../../../y-bot/storage/rdfs
+                  dirs: ../../storage/rdfs
                   subdirs: true
                   extension: txt
 
                 denormal_storage:
-                  file: ../../../y-bot/storage/lookups/denormal.txt
+                  file: ../../storage/lookups/denormal.txt
                 normal_storage:
-                  file: ../../../y-bot/storage/lookups/normal.txt
+                  file: ../../storage/lookups/normal.txt
                 gender_storage:
-                  file: ../../../y-bot/storage/lookups/gender.txt
+                  file: ../../storage/lookups/gender.txt
                 person_storage:
-                  file: ../../../y-bot/storage/lookups/person.txt
+                  file: ../../storage/lookups/person.txt
                 person2_storage:
-                  file: ../../../y-bot/storage/lookups/person2.txt
+                  file: ../../storage/lookups/person2.txt
                 regex_storage:
-                  file: ../../../y-bot/storage/regex/regex-templates.txt
+                  file: ../../storage/regex/regex-templates.txt
 
                 properties_storage:
-                  file: ../../../y-bot/storage/properties/properties.txt
+                  file: ../../storage/properties/properties.txt
                 defaults_storage:
-                  file: ../../../y-bot/storage/properties/defaults.txt
+                  file: ../../storage/properties/defaults.txt
                 variables_storage:
-                  dirs: ../../../y-bot/storage/variables
+                  dirs: ../../storage/variables
 
                 twitter_storage:
-                  dirs: ../../../y-bot/storage/twitter
+                  dirs: ../../storage/twitter
 
                 spelling_storage:
-                  file: ../../../y-bot/storage/spelling/corpus.txt
+                  file: ../../storage/spelling/corpus.txt
 
                 license_storage:
-                  file: ../../../y-bot/storage/licenses/license.keys
+                  file: ../../storage/licenses/license.keys
 
                 pattern_nodes_storage:
-                  file: ../../../y-bot/storage/nodes/pattern_nodes.conf
+                  file: ../../storage/nodes/pattern_nodes.conf
                 template_nodes_storage:
-                  file: ../../../y-bot/storage/nodes/template_nodes.conf
+                  file: ../../storage/nodes/template_nodes.conf
 
                 binaries_storage:
-                  file: ../../../y-bot/storage/braintree/braintree.bin
+                  file: ../../storage/braintree/braintree.bin
                 braintree_storage:
-                  file: ../../../y-bot/storage/braintree/braintree.xml
+                  file: ../../storage/braintree/braintree.xml
 
                 preprocessors_storage:
-                  file: ../../../y-bot/storage/processing/preprocessors.conf
+                  file: ../../storage/processing/preprocessors.conf
                 postprocessors_storage:
-                  file: ../../../y-bot/storage/processing/postprocessors.conf
+                  file: ../../storage/processing/postprocessors.conf
 
                 usergroups_storage:
-                  file: ../../../y-bot/storage/security/usergroups.yaml
+                  file: ../../storage/security/usergroups.yaml
 
           logger:
               type:   logger
               config:
                   conversation_logger: conversation
 
+  bots:
+    bot:
+      initial_question: Hi, how can I help you today?
+      initial_question_srai: YINITIALQUESTION
+      default_response: Sorry, I don't have an answer for that!
+      default_response_srai: YEMPTY
+      empty_string: YEMPTY
+      exit_response: So long, and thanks for the fish!
+      exit_response_srai: YEXITRESPONSE
 
-#####################################################################################################
-#
+      override_properties: true
 
-bot:
-    brain: brain
+      max_question_recursion: 1000
+      max_question_timeout: 60
+      max_search_depth: 100
+      max_search_timeout: 60
 
-    initial_question: Hi, how can I help you today?
-    initial_question_srai: YINITIALQUESTION
-    default_response: Sorry, I don't have an answer for that!
-    default_response_srai: YEMPTY
-    empty_string: YEMPTY
-    exit_response: So long, and thanks for the fish!
-    exit_response_srai: YEXITRESPONSE
+      spelling:
+        load: true
+        classname: programy.spelling.norvig.NorvigSpellingChecker
+        corpus: file
+        check_before: false
+        check_and_retry: false
 
-    override_properties: true
+      conversations:
+        save: true
+        load: false
 
-    max_question_recursion: 1000
-    max_question_timeout: 60
-    max_search_depth: 100
-    max_search_timeout: 60
+      brains:
+        brain:
 
-    spelling:
-      load: true
-      classname: programy.spelling.norvig.NorvigSpellingChecker
-      corpus: file
-      check_before: false
-      check_and_retry: false
+            # Overrides
+            overrides:
+              allow_system_aiml: true
+              allow_learn_aiml: true
+              allow_learnf_aiml: true
 
-    conversations:
-      save: true
-      load: false
+            # Defaults
+            defaults:
+              default_get: unknown
+              default_property: unknown
+              default_map: unknown
 
+            # Binary
+            binaries:
+              save_binary: false
+              load_binary: false
+              load_aiml_on_binary_fail: false
 
-#####################################################################################################
-#
+            debugfiles:
+              save-errors: true
+              save-duplicates: true
 
-brain:
+            # Braintree
+            braintree:
+              create: False
 
-    # Overrides
-    overrides:
-      allow_system_aiml: true
-      allow_learn_aiml: true
-      allow_learnf_aiml: true
+            services:
+                REST:
+                    classname: programy.services.rest.GenericRESTService
+                    method: GET
+                    host: 0.0.0.0
+                Pannous:
+                    classname: programy.services.pannous.PannousService
+                    url: http://weannie.pannous.com/api
+                Pandora:
+                    classname: programy.services.pandora.PandoraService
+                    url: http://www.pandorabots.com/pandora/talk-xml
+                Wikipedia:
+                    classname: programy.services.wikipediaservice.WikipediaService
+                DuckDuckGo:
+                    classname: programy.services.duckduckgo.DuckDuckGoService
+                    url: http://api.duckduckgo.com
 
-    # Defaults
-    defaults:
-      default-get: unknown
-      default-property: unknown
-      default-map: unknown
+            security:
+                authentication:
+                    classname: programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService
+                    denied_srai: AUTHENTICATION_FAILED
+                authorisation:
+                    classname: programy.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService
+                    denied_srai: AUTHORISATION_FAILED
 
-    # Binary
-    binaries:
-      save_binary: false
-      load_binary: false
-      load_aiml_on_binary_fail: false
+            oob:
+              default:
+                classname: programy.oob.defaults.default.DefaultOutOfBandProcessor
+              alarm:
+                classname: programy.oob.defaults.alarm.AlarmOutOfBandProcessor
+              camera:
+                classname: programy.oob.defaults.camera.CameraOutOfBandProcessor
+              clear:
+                classname: programy.oob.defaults.clear.ClearOutOfBandProcessor
+              dial:
+                classname: programy.oob.defaults.dial.DialOutOfBandProcessor
+              dialog:
+                classname: programy.oob.defaults.dialog.DialogOutOfBandProcessor
+              email:
+                classname: programy.oob.defaults.email.EmailOutOfBandProcessor
+              geomap:
+                classname: programy.oob.defaults.map.MapOutOfBandProcessor
+              schedule:
+                classname: programy.oob.defaults.schedule.ScheduleOutOfBandProcessor
+              search:
+                classname: programy.oob.defaults.search.SearchOutOfBandProcessor
+              sms:
+                classname: programy.oob.defaults.sms.SMSOutOfBandProcessor
+              url:
+                classname: programy.oob.defaults.url.URLOutOfBandProcessor
+              wifi:
+                classname: programy.oob.defaults.wifi.WifiOutOfBandProcessor
 
-    debugfiles:
-      save-errors: true
-      save-duplicates: true
-
-    # Braintree
-    braintree:
-      create: False
-
-    services:
-        REST:
-            classname: programy.services.rest.GenericRESTService
-            method: GET
-            host: 0.0.0.0
-        Pannous:
-            classname: programy.services.pannous.PannousService
-            url: http://weannie.pannous.com/api
-        Pandora:
-            classname: programy.services.pandora.PandoraService
-            url: http://www.pandorabots.com/pandora/talk-xml
-        Wikipedia:
-            classname: programy.services.wikipediaservice.WikipediaService
-        DuckDuckGo:
-            classname: programy.services.duckduckgo.DuckDuckGoService
-            url: http://api.duckduckgo.com
-
-    security:
-        authentication:
-            classname: programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService
-            denied_srai: AUTHENTICATION_FAILED
-        authorisation:
-            classname: programy.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService
-            denied_srai: AUTHORISATION_FAILED
-
-    oob:
-      default:
-        classname: programy.oob.defaults.default.DefaultOutOfBandProcessor
-      alarm:
-        classname: programy.oob.defaults.alarm.AlarmOutOfBandProcessor
-      camera:
-        classname: programy.oob.defaults.camera.CameraOutOfBandProcessor
-      clear:
-        classname: programy.oob.defaults.clear.ClearOutOfBandProcessor
-      dial:
-        classname: programy.oob.defaults.dial.DialOutOfBandProcessor
-      dialog:
-        classname: programy.oob.defaults.dialog.DialogOutOfBandProcessor
-      email:
-        classname: programy.oob.defaults.email.EmailOutOfBandProcessor
-      geomap:
-        classname: programy.oob.defaults.map.MapOutOfBandProcessor
-      schedule:
-        classname: programy.oob.defaults.schedule.ScheduleOutOfBandProcessor
-      search:
-        classname: programy.oob.defaults.search.SearchOutOfBandProcessor
-      sms:
-        classname: programy.oob.defaults.sms.SMSOutOfBandProcessor
-      url:
-        classname: programy.oob.defaults.url.URLOutOfBandProcessor
-      wifi:
-        classname: programy.oob.defaults.wifi.WifiOutOfBandProcessor
-
-    dynamic:
-        variables:
-            gettime: programy.dynamic.variables.datetime.GetTime
-        sets:
-            numeric: programy.dynamic.sets.numeric.IsNumeric
-            roman:   programy.dynamic.sets.roman.IsRomanNumeral
-        maps:
-            romantodec: programy.dynamic.maps.roman.MapRomanToDecimal
-            dectoroman: programy.dynamic.maps.roman.MapDecimalToRoman
+            dynamic:
+                variables:
+                    gettime: programy.dynamic.variables.datetime.GetTime
+                sets:
+                    numeric: programy.dynamic.sets.numeric.IsNumeric
+                    roman:   programy.dynamic.sets.roman.IsRomanNumeral
+                maps:
+                    romantodec: programy.dynamic.maps.roman.MapRomanToDecimal
+                    dectoroman: programy.dynamic.maps.roman.MapDecimalToRoman
 

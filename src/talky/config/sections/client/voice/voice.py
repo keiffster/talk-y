@@ -14,7 +14,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.client.config import ClientConfigurationData
+from programy.clients.config import ClientConfigurationData
 from talky.config.sections.client.voice.tts.pytts import PyTTSTextToSpeechConfiguration
 from talky.config.sections.client.voice.stt.azhang import AnthonyZhangSpeechToTextConfiguration
 
