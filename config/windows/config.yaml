@@ -20,124 +20,124 @@ voice:
     remove_all_jobs: False
 
   storage:
-      entities:
-          categories: file
-          errors: file
-          duplicates: file
-          learnf: file
-          conversations:   file
+    entities:
+      categories: file
+      errors: file
+      duplicates: file
+      learnf: file
+      conversations:   file
 
-          maps: file
-          sets: file
-          rdf: file
+      maps: file
+      sets: file
+      rdf: file
 
-          denormal: file
-          normal: file
-          gender: file
-          person: file
-          person2: file
-          regex_templates: file
+      denormal: file
+      normal: file
+      gender: file
+      person: file
+      person2: file
+      regex_templates: file
 
-          properties: file
-          variables: file
+      properties: file
+      variables: file
 
-          twitter: file
+      twitter: file
 
-          spelling_corpus: file
-          license_keys: file
+      spelling_corpus: file
+      license_keys: file
 
-          template_nodes: file
-          pattern_nodes: file
+      template_nodes: file
+      pattern_nodes: file
 
-          binaries: file
-          braintree: file
+      binaries: file
+      braintree: file
 
-          preprocessors: file
-          postprocessors: file
+      preprocessors: file
+      postprocessors: file
 
-          usergroups: file
+      usergroups: file
 
-      stores:
+    stores:
 
-          file:
-              type:   file
-              config:
-                categories_storage:
-                  dirs: ..\..\..\y-bot\storage\categories
-                  subdirs: true
-                  extension: .aiml
-                errors_storage:
-                  file: ..\..\..\y-bot\storage\debug\errors.txt
-                duplicates_storage:
-                  file: ..\..\..\y-bot\storage\debug\duplicates.txt
-                learnf_storage:
-                  dirs: ..\..\..\y-bot\storage\categories\learnf
+      file:
+        type:   file
+        config:
+          categories_storage:
+            dirs: ..\..\..\y-bot\storage\categories
+            subdirs: true
+            extension: .aiml
+          errors_storage:
+            file: ..\..\..\y-bot\storage\debug\errors.txt
+          duplicates_storage:
+            file: ..\..\..\y-bot\storage\debug\duplicates.txt
+          learnf_storage:
+            dirs: ..\..\..\y-bot\storage\categories\learnf
 
-                conversation_storage:
-                  dirs: ..\..\..\y-bot\storage\conversations
+          conversation_storage:
+            dirs: ..\..\..\y-bot\storage\conversations
 
-                sets_storage:
-                  dirs: ..\..\..\y-bot\storage\sets
-                  extension: txt
-                maps_storage:
-                  dirs: ..\..\..\y-bot\storage\maps
-                  extension: txt
-                rdf_storage:
-                  dirs: ..\..\..\y-bot\storage\rdfs
-                  subdirs: true
-                  extension: txt
+          sets_storage:
+            dirs: ..\..\..\y-bot\storage\sets
+            extension: txt
+          maps_storage:
+            dirs: ..\..\..\y-bot\storage\maps
+            extension: txt
+          rdf_storage:
+            dirs: ..\..\..\y-bot\storage\rdfs
+            subdirs: true
+            extension: txt
 
-                denormal_storage:
-                  file: ..\..\..\y-bot\storage\lookups\denormal.txt
-                normal_storage:
-                  file: ..\..\..\y-bot\storage\lookups\normal.txt
-                gender_storage:
-                  file: ..\..\..\y-bot\storage\lookups\gender.txt
-                person_storage:
-                  file: ..\..\..\y-bot\storage\lookups\person.txt
-                person2_storage:
-                  file: ..\..\..\y-bot\storage\lookups\person2.txt
-                regex_storage:
-                  file: ..\..\..\y-bot\storage\lookups\regex.txt
+          denormal_storage:
+            file: ..\..\..\y-bot\storage\lookups\denormal.txt
+          normal_storage:
+            file: ..\..\..\y-bot\storage\lookups\normal.txt
+          gender_storage:
+            file: ..\..\..\y-bot\storage\lookups\gender.txt
+          person_storage:
+            file: ..\..\..\y-bot\storage\lookups\person.txt
+          person2_storage:
+            file: ..\..\..\y-bot\storage\lookups\person2.txt
+          regex_storage:
+            file: ..\..\..\y-bot\storage\lookups\regex.txt
 
-                properties_storage:
-                  file: ..\..\..\y-bot\storage\properties\properties.txt
-                defaults_storage:
-                  file: ..\..\..\y-bot\storage\properties\defaults.txt
-                variables_storage:
-                  dirs: ..\..\..\y-bot\storage\variables
+          properties_storage:
+            file: ..\..\..\y-bot\storage\properties\properties.txt
+          defaults_storage:
+            file: ..\..\..\y-bot\storage\properties\defaults.txt
+          variables_storage:
+            dirs: ..\..\..\y-bot\storage\variables
 
-                twitter_storage:
-                  dirs: ..\..\..\y-bot\storage\twitter
+          twitter_storage:
+            dirs: ..\..\..\y-bot\storage\twitter
 
-                spelling_storage:
-                  file: ..\..\..\y-bot\storage\spelling\corpus.txt
+          spelling_storage:
+            file: ..\..\..\y-bot\storage\spelling\corpus.txt
 
-                license_storage:
-                  file: ..\..\..\y-bot\storage\licenses\license.keys
+          license_storage:
+            file: ..\..\..\y-bot\storage\licenses\license.keys
 
-                pattern_nodes_storage:
-                  file: ..\..\..\y-bot\storage\nodes\pattern_nodes.conf
-                template_nodes_storage:
-                  file: ..\..\..\y-bot\storage\nodes\template_nodes.conf
+          pattern_nodes_storage:
+            file: ..\..\..\y-bot\storage\nodes\pattern_nodes.conf
+          template_nodes_storage:
+            file: ..\..\..\y-bot\storage\nodes\template_nodes.conf
 
-                binaries_storage:
-                  file: ..\..\..\y-bot\storage\braintree\braintree.bin
-                braintree_storage:
-                  file: ..\..\..\y-bot\storage\braintree\braintree.xml
+          binaries_storage:
+            file: ..\..\..\y-bot\storage\braintree\braintree.bin
+          braintree_storage:
+            file: ..\..\..\y-bot\storage\braintree\braintree.xml
 
-                preprocessors_storage:
-                  file: ..\..\..\y-bot\storage\processing\preprocessors.conf
-                postprocessors_storage:
-                  file: ..\..\..\y-bot\storage\processing\postprocessors.conf
+          preprocessors_storage:
+            file: ..\..\..\y-bot\storage\processing\preprocessors.conf
+          postprocessors_storage:
+            file: ..\..\..\y-bot\storage\processing\postprocessors.conf
 
-                usergroups_storage:
-                  file: ..\..\..\y-bot\storage\security\usergroups.yaml
+          usergroups_storage:
+            file: ..\..\..\y-bot\storage\security\usergroups.yaml
 
-          logger:
-              type:   logger
-              config:
-                  conversation_logger: conversation
+      logger:
+        type:   logger
+        config:
+          conversation_logger: conversation
   bots:
     bot:
       initial_question: Hi, how can I help you today?
@@ -169,64 +169,64 @@ voice:
       brains:
         brain:
 
-            # Overrides
-            overrides:
-              allow_system_aiml: true
-              allow_learn_aiml: true
-              allow_learnf_aiml: true
+          # Overrides
+          overrides:
+            allow_system_aiml: true
+            allow_learn_aiml: true
+            allow_learnf_aiml: true
 
-            # Defaults
-            defaults:
-              default_get: unknown
-              default_property: unknown
-              default_map: unknown
+          # Defaults
+          defaults:
+            default_get: unknown
+            default_property: unknown
+            default_map: unknown
 
-            # Binary
-            binaries:
-              save_binary: false
-              load_binary: false
-              load_aiml_on_binary_fail: false
+          # Binary
+          binaries:
+            save_binary: false
+            load_binary: false
+            load_aiml_on_binary_fail: false
 
-            debugfiles:
-              save-errors: true
-              save-duplicates: true
+          debugfiles:
+            save-errors: true
+            save-duplicates: true
 
-            # Braintree
-            braintree:
-              create: False
+          # Braintree
+          braintree:
+            create: False
 
-            services:
-                REST:
-                    classname: programy.services.rest.GenericRESTService
-                    method: GET
-                    host: 0.0.0.0
-                Pannous:
-                    classname: programy.services.pannous.PannousService
-                    url: http:\\weannie.pannous.com\api
-                Pandora:
-                    classname: programy.services.pandora.PandoraService
-                    url: http:\\www.pandorabots.com\pandora\talk-xml
-                Wikipedia:
-                    classname: programy.services.wikipediaservice.WikipediaService
-                DuckDuckGo:
-                    classname: programy.services.duckduckgo.DuckDuckGoService
-                    url: http:\\api.duckduckgo.com
+          services:
+            REST:
+              classname: programy.services.rest.GenericRESTService
+              method: GET
+              host: 0.0.0.0
+            Pannous:
+              classname: programy.services.pannous.PannousService
+              url: http:\\weannie.pannous.com\api
+            Pandora:
+              classname: programy.services.pandora.PandoraService
+              url: http:\\www.pandorabots.com\pandora\talk-xml
+            Wikipedia:
+              classname: programy.services.wikipediaservice.WikipediaService
+            DuckDuckGo:
+              classname: programy.services.duckduckgo.DuckDuckGoService
+              url: http:\\api.duckduckgo.com
 
-            security:
-                authentication:
-                    classname: programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService
-                    denied_srai: AUTHENTICATION_FAILED
-                authorisation:
-                    classname: programy.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService
-                    denied_srai: AUTHORISATION_FAILED
+          security:
+            authentication:
+              classname: programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService
+              denied_srai: AUTHENTICATION_FAILED
+            authorisation:
+              classname: programy.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService
+              denied_srai: AUTHORISATION_FAILED
 
-             dynamic:
-                variables:
-                    gettime: programy.dynamic.variables.datetime.GetTime
-                sets:
-                    numeric: programy.dynamic.sets.numeric.IsNumeric
-                    roman:   programy.dynamic.sets.roman.IsRomanNumeral
-                maps:
-                    romantodec: programy.dynamic.maps.roman.MapRomanToDecimal
-                    dectoroman: programy.dynamic.maps.roman.MapDecimalToRoman
+            dynamic:
+              variables:
+                gettime: programy.dynamic.variables.datetime.GetTime
+              sets:
+                numeric: programy.dynamic.sets.numeric.IsNumeric
+                roman:   programy.dynamic.sets.roman.IsRomanNumeral
+              maps:
+                romantodec: programy.dynamic.maps.roman.MapRomanToDecimal
+                dectoroman: programy.dynamic.maps.roman.MapDecimalToRoman
 
